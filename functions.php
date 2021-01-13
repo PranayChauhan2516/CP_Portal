@@ -33,6 +33,7 @@
 
 				if(mysqli_query($connection, $query)){
 				    echo "Records inserted successfully.";
+				    
 				} else{
 				    echo "ERROR: Could not able to execute.";
 				}
