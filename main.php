@@ -31,21 +31,63 @@
 			      	</li>
 				</ul>
 			</div>
+
+			<form class="form-inline my-2 my-lg-0" method="post" action="main.php">
+      			<input class="form-control mr-sm-2" name="query" type="search" placeholder="Search" aria-label="Search">
+      			<button class="btn btn-primary btn-outline-success my-2 my-sm-0" type="submit" name="search">Search</button>
+    		</form>
 		</nav>  
-		<table class="table">
-		  	<thead>
-		    	<tr>
-		    		<th scope="col">ID</th>
-		      		<th scope="col">Name</th>
-		      		<th scope="col">Roll Number</th>
-		      		<th scope="col">Total Score</th>
-		    	</tr>
-		  	</thead>
-		  	<tbody>
-				<?php displayData(); ?>
-			</tbody>
-		</table>
+		<font size="5">
+			<table class="table">
+			  	<thead>
+			    	<tr>
+			    		<th scope="col">ID</th>
+			      		<th scope="col">Name</th>
+			      		<th scope="col">Roll Number</th>
+			      		<th scope="col">Total Score</th>
+			    	</tr>
+			  	</thead>
+
+
+			  	<tbody>
+					<?php displayData(); ?>
+				</tbody>
+			</table>
+		</font>
+
 		
+			<div class="card" style="align-items: center;">
+				<form action="main.php" method="post">
+				    <div class="form-row align-items-center">
+				    	<div class="col-auto my-1">
+				      		<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Year</label>
+					      	<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="year">
+						        <option selected>Year</option>
+						        <option value="1">1</option>
+						        <option value="2">2</option>
+						        <option value="3">3</option>
+						        <option value="4">4</option>
+					      	</select>
+				    	</div>
+					    <div class="col-auto my-1">
+					      	<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Branch</label>
+					      	<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="branch">
+						        <option selected>Branch</option>
+						        <option value="CSE">CSE</option>
+						        <option value="EC">EC</option>
+						        <option value="EE">EE</option>
+						        <option value="ME">ME</option>
+						        <option value="IC">IC</option>
+				      		</select>
+					    </div>
+					    <div class="col-auto my-1">
+					      	<button type="submit" class="btn btn-primary">Submit</button>
+					    </div>
+				 	</div>
+				</form>
+			</div>
+
+
 	</body>
 
 </html>

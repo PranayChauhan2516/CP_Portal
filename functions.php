@@ -73,7 +73,35 @@
 	function displayData() {
 		global $connection;
 		if ($connection) {
+			
 			$query = "SELECT * FROM rating ORDER BY totalScore DESC";
+			
+			if(isset($_POST['search'])) {
+				$search=$_POST['query'];
+				$query="SELECT * FROM rating WHERE firstname LIKE '%$search%' OR lastname LIKE '%$search%' OR rollnumber LIKE '%$search%'";
+			}
+
+			if(isset($_POST['year']) || isset($_POST['branch'])){
+
+				$year=$_POST['year'];
+				$branch=$_POST['branch'];
+
+				if($year!="Year") {
+					if($branch!="Branch") {
+						$query="SELECT * FROM rating WHERE year='$year' AND branch='$branch' ORDER BY totalScore DESC";
+					} else {
+						$query="SELECT * FROM rating WHERE year='$year' ORDER BY totalScore DESC";
+					}
+				}
+				else if ($year=="Year") {
+					if($branch!="Branch") {
+						$query="SELECT * FROM rating WHERE branch='$branch' ORDER BY totalScore DESC";
+					} else {
+						$query="SELECT * FROM rating ORDER BY totalScore DESC";
+					}
+				}
+			}
+
 			$result = $connection->query($query);
 			$id=1;
 			if ($result->num_rows > 0) {
@@ -82,7 +110,7 @@
 					$id++;
 				}
 			} else {
-				echo "0 results!";
+				echo "<tr><td> 0 results! </td><td>";
 			}
 		}
 	}
