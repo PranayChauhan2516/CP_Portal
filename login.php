@@ -1,9 +1,12 @@
+<?php 
+session_start();
+include "db.php";
+include "functions.php";
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
-
-<?php include "db.php"; ?>
-<?php include "functions.php"; ?>
 
 	<head>
 	    <meta charset="UTF-8">
@@ -16,7 +19,7 @@
 		<div class="login-page">
 		  <div class="form">
 		  	<h2>Login</h2>
-		    <form class="login-form" action="main.php" method="post">
+		    <form class="login-form" method="post">
 		      <input type="text" name="rollnumber" placeholder="RollNumber"/>
 		      <input type="password" name="password" placeholder="Password"/>
 		      <button name="submit" type="submit">Login</button>

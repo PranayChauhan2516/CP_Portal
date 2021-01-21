@@ -1,4 +1,6 @@
-<?php include "db.php";?>
+<?php 
+include "db.php";
+?>
 
 <?php
 
@@ -49,6 +51,7 @@
 
 			$rollnumber = $_POST['rollnumber'];
 			$password = $_POST['password'];
+			$_SESSION['roll'] = $rollnumber;
 
 			if ($connection) {
 				$query = "SELECT password FROM rating WHERE rollnumber='$rollnumber'";
@@ -57,6 +60,7 @@
 					if ($row = $result->fetch_assoc()) {
 						if (strcmp($row['password'],$password)==0) {
 							echo "Login successful!, Welcome";
+							header("Location: main.php?roll=".$_SESSION['roll']);
 						} else {
 							echo "Enter correct password!";
 						}
@@ -113,6 +117,45 @@
 				echo "<tr><td> 0 results! </td><td>";
 			}
 		}
+	}
+
+	function displayProfile() {
+		global $connection;
+		$rollnumber=$_SESSION['roll'];
+		if ($connection) {
+			$query = "SELECT * FROM rating WHERE rollnumber='$rollnumber' ORDER BY totalScore DESC";
+			$result = $connection->query($query);
+			$id=1;
+			if ($result->num_rows > 0) {
+				while ($row = $result->fetch_assoc()) {
+					echo "<tr><td> ". $id ."</td><td> " . $row["firstname"]. " " . $row["lastname"]. "</td><td> " . $row["rollnumber"]. "</td><td> " . $row["totalScore"] . "<br>";
+					$id++;
+				}
+			} else {
+				echo "<tr><td> 0 results! </td><td>";
+			}
+
+			$plot = "SELECT * FROM graph WHERE rollnumber='$rollnumber' ORDER BY date";
+			$result = $connection->query($plot);
+			$data=array();
+			if ($result->num_rows > 0) {
+				while ($row = $result->fetch_assoc()) {
+					$totalScore = $row["totalScore"];
+					$date = $row["Date"];
+					array_push($data, array('y' => $totalScore, 'label' => $date));
+				}
+			} else {
+				echo "Not Sufficient data!";
+			}
+			return $data;
+		}
+	}
+
+	function LogOut() {
+		// remove all session variables
+		session_unset();
+		session_destroy();
+		header('Location: login.php');
 	}
 
 ?>

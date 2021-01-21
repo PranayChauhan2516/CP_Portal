@@ -21,7 +21,7 @@ $rollnumber=$_SESSION['roll'];
 	<body>
 
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	    	<a class="navbar-brand" href="main.php?roll=<?php echo $rollnumber ?>">RatingPortal</a>
+	    	<a class="navbar-brand" href="main.php">RatingPortal</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			    <span class="navbar-toggler-icon"></span>
 			</button>
@@ -55,47 +55,33 @@ $rollnumber=$_SESSION['roll'];
 			      		<th scope="col">Total Score</th>
 			    	</tr>
 			  	</thead>
-
-
 			  	<tbody>
-					<?php displayData(); ?>
+					<?php $data=displayProfile(); ?>
 				</tbody>
 			</table>
+			<div id="chartContainer" style="height: 300px; width: 100%;"></div>
 		</font>
 
-		
-			<div class="card" style="align-items: center;">
-				<form action="main.php" method="post">
-				    <div class="form-row align-items-center">
-				    	<div class="col-auto my-1">
-				      		<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Year</label>
-					      	<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="year">
-						        <option selected>Year</option>
-						        <option value="1">1</option>
-						        <option value="2">2</option>
-						        <option value="3">3</option>
-						        <option value="4">4</option>
-					      	</select>
-				    	</div>
-					    <div class="col-auto my-1">
-					      	<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Branch</label>
-					      	<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="branch">
-						        <option selected>Branch</option>
-						        <option value="CSE">CSE</option>
-						        <option value="EC">EC</option>
-						        <option value="EE">EE</option>
-						        <option value="ME">ME</option>
-						        <option value="IC">IC</option>
-				      		</select>
-					    </div>
-					    <div class="col-auto my-1">
-					      	<button type="submit" class="btn btn-primary">Submit</button>
-					    </div>
-				 	</div>
-				</form>
-			</div>
-
-
+		<script>
+			window.onload = function () {
+			 
+			var chart = new CanvasJS.Chart("chartContainer", {
+				title: {
+					text: "Scorecard Graph"
+				},
+				axisY: {
+					title: "Total Score"
+				},
+				data: [{
+					type: "line",
+					dataPoints: <?php echo json_encode($data, JSON_NUMERIC_CHECK); ?>
+				}]
+			});
+			chart.render();
+			 
+			}
+		</script>	
+		<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>	
 	</body>
 
 </html>
