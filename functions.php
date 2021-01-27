@@ -110,7 +110,13 @@ include "db.php";
 			$id=1;
 			if ($result->num_rows > 0) {
 				while ($row = $result->fetch_assoc()) {
-					echo "<tr><td> ". $id ."</td><td> " . $row["firstname"]. " " . $row["lastname"]. "</td><td> " . $row["rollnumber"]. "</td><td> " . $row["totalScore"] . "<br>";
+					echo 
+					'<tr role="button" data-href="view.php?roll='. $_SESSION["roll"] . '?view=' . $row["rollnumber"] . '">
+					<td> '. $id .'</td>
+					<td> ' . $row["firstname"]. ' ' . $row["lastname"]. '</td>
+					<td> ' . $row["rollnumber"]. '</td>
+					<td> ' . $row["totalScore"] . '</td>
+					</tr>';
 					$id++;
 				}
 			} else {
@@ -122,6 +128,38 @@ include "db.php";
 	function displayProfile() {
 		global $connection;
 		$rollnumber=$_SESSION['roll'];
+		if ($connection) {
+			$query = "SELECT * FROM rating WHERE rollnumber='$rollnumber' ORDER BY totalScore DESC";
+			$result = $connection->query($query);
+			$id=1;
+			if ($result->num_rows > 0) {
+				while ($row = $result->fetch_assoc()) {
+					echo "<tr><td> ". $id ."</td><td> " . $row["firstname"]. " " . $row["lastname"]. "</td><td> " . $row["rollnumber"]. "</td><td> " . $row["totalScore"] . "<br>";
+					$id++;
+				}
+			} else {
+				echo "<tr><td> 0 results! </td><td>";
+			}
+
+			$plot = "SELECT * FROM graph WHERE rollnumber='$rollnumber' ORDER BY date";
+			$result = $connection->query($plot);
+			$data=array();
+			if ($result->num_rows > 0) {
+				while ($row = $result->fetch_assoc()) {
+					$totalScore = $row["totalScore"];
+					$date = $row["Date"];
+					array_push($data, array('y' => $totalScore, 'label' => $date));
+				}
+			} else {
+				echo "Not Sufficient data!";
+			}
+			return $data;
+		}
+	}
+
+	function displayOthersProfile() {
+		global $connection;
+		$rollnumber=$_SESSION['view'];
 		if ($connection) {
 			$query = "SELECT * FROM rating WHERE rollnumber='$rollnumber' ORDER BY totalScore DESC";
 			$result = $connection->query($query);

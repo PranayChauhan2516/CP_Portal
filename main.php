@@ -13,7 +13,7 @@ $rollnumber=$_SESSION['roll'];
 	<head>
 	    <meta charset="UTF-8">
 	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	    
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	    <title>Home</title>
 	</head>
@@ -46,7 +46,7 @@ $rollnumber=$_SESSION['roll'];
     		</form>
 		</nav>  
 		<font size="5">
-			<table class="table">
+			<table class="table table-stripped table-hover">
 			  	<thead>
 			    	<tr>
 			    		<th scope="col">ID</th>
@@ -64,38 +64,44 @@ $rollnumber=$_SESSION['roll'];
 		</font>
 
 		
-			<div class="card" style="align-items: center;">
-				<form action="main.php" method="post">
-				    <div class="form-row align-items-center">
-				    	<div class="col-auto my-1">
-				      		<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Year</label>
-					      	<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="year">
-						        <option selected>Year</option>
-						        <option value="1">1</option>
-						        <option value="2">2</option>
-						        <option value="3">3</option>
-						        <option value="4">4</option>
-					      	</select>
-				    	</div>
-					    <div class="col-auto my-1">
-					      	<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Branch</label>
-					      	<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="branch">
-						        <option selected>Branch</option>
-						        <option value="CSE">CSE</option>
-						        <option value="EC">EC</option>
-						        <option value="EE">EE</option>
-						        <option value="ME">ME</option>
-						        <option value="IC">IC</option>
-				      		</select>
-					    </div>
-					    <div class="col-auto my-1">
-					      	<button type="submit" class="btn btn-primary">Submit</button>
-					    </div>
-				 	</div>
-				</form>
-			</div>
-
-
+		<div class="card" style="align-items: center;">
+			<form action="main.php" method="post">
+			    <div class="form-row align-items-center">
+			    	<div class="col-auto my-1">
+			      		<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Year</label>
+				      	<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="year">
+					        <option selected>Year</option>
+					        <option value="1">1</option>
+					        <option value="2">2</option>
+					        <option value="3">3</option>
+					        <option value="4">4</option>
+				      	</select>
+			    	</div>
+				    <div class="col-auto my-1">
+				      	<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Branch</label>
+				      	<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="branch">
+					        <option selected>Branch</option>
+					        <option value="CSE">CSE</option>
+					        <option value="EC">EC</option>
+					        <option value="EE">EE</option>
+					        <option value="ME">ME</option>
+					        <option value="IC">IC</option>
+			      		</select>
+				    </div>
+				    <div class="col-auto my-1">
+				      	<button type="submit" class="btn btn-primary">Submit</button>
+				    </div>
+			 	</div>
+			</form>
+		</div>
+		<script>
+			$(function(){
+			     $(".table").on("click", "tr[role=\"button\"]", function (e) {
+			          window.location = $(this).data("href");
+			     });
+			});
+		</script>
+		
 	</body>
 
 </html>

@@ -6,6 +6,7 @@ if (isset($_GET['logout'])) {
     LogOut();
 }
 $rollnumber=$_SESSION['roll'];
+$_SESSION['view'] = substr($_SERVER['REQUEST_URI'], 53);
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +14,6 @@ $rollnumber=$_SESSION['roll'];
 	<head>
 	    <meta charset="UTF-8">
 	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	    
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	    <title>Home</title>
 	</head>
@@ -56,7 +56,7 @@ $rollnumber=$_SESSION['roll'];
 			    	</tr>
 			  	</thead>
 			  	<tbody>
-					<?php $data=displayProfile(); ?>
+					<?php $data=displayOthersProfile(); ?>
 				</tbody>
 			</table>
 			<div id="chartContainer" style="height: 300px; width: 100%;"></div>
