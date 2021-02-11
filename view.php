@@ -6,7 +6,7 @@ if (isset($_GET['logout'])) {
     LogOut();
 }
 $rollnumber=$_SESSION['roll'];
-$_SESSION['view'] = substr($_SERVER['REQUEST_URI'], 60);
+$_SESSION['view'] = substr($_SERVER['REQUEST_URI'], 59);
 ?>
 
 <!DOCTYPE html>
