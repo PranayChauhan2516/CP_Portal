@@ -160,6 +160,7 @@ include "db.php";
 	function displayOthersProfile() {
 		global $connection;
 		$rollnumber=$_SESSION['view'];
+		echo $_SESSION['view']." +";
 		if ($connection) {
 			$query = "SELECT * FROM rating WHERE rollnumber='$rollnumber' ORDER BY totalScore DESC";
 			$result = $connection->query($query);
