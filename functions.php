@@ -37,7 +37,7 @@ include "db.php";
 				    echo "Records inserted successfully.";
 				    
 				} else{
-				    echo "ERROR: Could not able to execute.";
+				    echo "ERROR: Data already exists.";
 				}
 			} else {
 				echo "Error Connecting to the database!";
